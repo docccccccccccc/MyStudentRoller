@@ -27,7 +27,7 @@ const handleSettingReset = () => {
 
 const handleStudentListReset = () => {
   useStudentListStore().resetStudentList() // 重置设置
-  dialogs.resetSettings = false
+  dialogs.resetStudentList = false
 }
 
 // 学生名单上传
