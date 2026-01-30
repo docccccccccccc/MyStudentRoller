@@ -26,7 +26,7 @@ const handleSettingReset = () => {
 }
 
 const handleStudentListReset = () => {
-  useStudentListStore().resetStudentList() // 重置设置
+  useStudentListStore().resetStudentList() // 重置学生名单
   dialogs.resetStudentList = false
 }
 
