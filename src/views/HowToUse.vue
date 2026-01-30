@@ -4,6 +4,7 @@
   <div>
     <h1>帮助</h1>
     <p>（这份帮助是考虑到不懂电脑的人的，如果你觉得太啰嗦，并且知道具体操作的话，可以不看）</p>
+    <el-card>
     <h2>目录</h2>
     <el-anchor :offset="72">
       <el-anchor-link href="#roll">抽选操作</el-anchor-link>
@@ -40,5 +41,6 @@
     <h2 id="history">查看历史记录</h2>
     <p>可以点击左侧的 <font-awesome-icon icon="fas fa-clipboard" /> 图标查看历史记录，历史记录按时间排序，且会自动保存，不会因关闭页面而重置。</p>
     <p>你也可以点击下方的红色按钮清空历史记录。</p>
+  </el-card>
   </div>
 </template>

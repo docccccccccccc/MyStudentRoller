@@ -1,0 +1,15 @@
+body {
+  font-family:
+    'FiraCode', '思源黑体',
+    Inter, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    '微软雅黑', Arial, sans-serif;
+  background-repeat: no-repeat;
+  background-position:center;
+  background-size: cover;
+  background-attachment: fixed;
+  --opacity: 100;
+}
+
+.el-card {
+  opacity: calc(var(--opacity, 100) / 100)
+}

@@ -17,7 +17,7 @@ if(!localStorage.getItem("settings")) {
 const dialogs = reactive({
   importStudentList: false,
   resetSettings: false,
-  resetList: false
+  resetStudentList: false
 })
 
 const handleSettingReset = () => {
@@ -134,7 +134,7 @@ const handleUploadBackgroundImage = () => {
           <input type="file" accept="image/*" style="display: none;" id="select-bg-file">
         </el-form-item>
         <el-form-item label="不透明度（%）">
-          <el-slider :min="40" :max="100" v-model="settings.opacity" show-input />
+          <el-slider :min="80" :max="100" v-model="settings.opacity" show-input />
         </el-form-item>
       </el-form>
     </el-card>
@@ -163,10 +163,10 @@ const handleUploadBackgroundImage = () => {
     <el-card>
       <template #header>危险操作</template>
       <el-button type="danger" @click="dialogs.resetSettings = true">
-        重置设置和学生名单
+        重置设置
       </el-button>
-      <el-button type="danger" @click="dialogs.resetSettings = true">
-        重置设置和学生名单
+      <el-button type="danger" @click="dialogs.resetStudentList = true">
+        重置学生名单
       </el-button>
     </el-card>
   </div>
@@ -189,12 +189,12 @@ const handleUploadBackgroundImage = () => {
       <el-button type="danger" @click="handleSettingReset">重置吧</el-button>
     </template>
   </el-dialog>
-  <el-dialog title="警告" :show-close="false" v-model="dialogs.resetList">
+  <el-dialog title="警告" :show-close="false" v-model="dialogs.resetStudentList">
     <p>你即将重置学生名单！！</p>
     <p><b>（仅推荐在新的班级使用时重置）</b></p>
     <p>这是最后的警告，你确定要清除吗？</p>
     <template #footer>
-      <el-button @click="dialogs.resetSettings = false">点错了点错了</el-button>
+      <el-button @click="dialogs.resetStudentList = false">点错了点错了</el-button>
       <el-button type="danger" @click="handleStudentListReset">重置吧</el-button>
     </template>
   </el-dialog>

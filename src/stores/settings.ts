@@ -32,6 +32,7 @@ export const useSettingStore = defineStore('settingStore', () => {
 
   watch(settings, (newSettings: Settings) => {
     localStorage.setItem('settings', JSON.stringify(newSettings))
+    document.body.style.setProperty('--opacity', newSettings.opacity.toString())
   }, {deep: true})
 
   function resetSettings() {

@@ -67,12 +67,6 @@ onMounted(() => {
 </template>
 
 <style scoped lang="scss">
-body {
-  font-family:
-    Inter, 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
-    '微软雅黑', Arial, sans-serif;
-}
-
 .el-row {
   margin-bottom: 20px;
   &:last-child {
@@ -92,8 +86,4 @@ body {
   height: 100vh;
   z-index: 999;
 }
-
-// .el-card {
-//   backdrop-filter: opacity(var(--opacity, 0.8));
-// }
 </style>

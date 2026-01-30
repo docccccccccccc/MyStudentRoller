@@ -16,6 +16,8 @@ import './assets/styles/element/index.scss'
 import './assets/styles/border.scss' // 边框
 import './assets/styles/radius.scss' // 圆角
 import './assets/styles/shadow.scss' // 圆角
+import './assets/styles/index.scss' // 全局样式
+import './assets/styles/font.css' // 字体
 
 // 导入 Font Awesome 图标组件
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
