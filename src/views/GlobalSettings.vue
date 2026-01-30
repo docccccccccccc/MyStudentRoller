@@ -1,7 +1,7 @@
 <script setup lang="ts">
 // 颜色主题切换
 import { isDark } from '@/utils/colorScheme'
-import { useStudentsStore } from '@/stores/students'
+import { useStudentListStore } from '@/stores/students'
 import { storeToRefs } from 'pinia'
 import { useSettingStore, defaultSettings } from '@/stores/settings'
 import { reactive } from 'vue'
@@ -10,21 +10,29 @@ import { ElMessage } from 'element-plus'
 const { settings } = storeToRefs(useSettingStore())
 
 if(!localStorage.getItem("settings")) {
-  localStorage.setItem("settings", JSON.stringify(defaultSettings))
+  localStorage.setItem("settings", JSON.stringify(defaultSettings)) // 从 LocalStorage 读取设置
 }
 
+// 控制对话框开关状态
 const dialogs = reactive({
   importStudentList: false,
-  resetSettings: false
+  resetSettings: false,
+  resetList: false
 })
 
-const handleReset = () => {
-  useSettingStore().resetSettings()
-  useStudentsStore().resetStudentList()
+const handleSettingReset = () => {
+  useSettingStore().resetSettings() // 重置设置
   dialogs.resetSettings = false
 }
-const handleUploadList = () => {
-  const uploadButton = document.querySelector('#select-list-file') as HTMLInputElement;
+
+const handleStudentListReset = () => {
+  useStudentListStore().resetStudentList() // 重置设置
+  dialogs.resetSettings = false
+}
+
+// 学生名单上传
+const handleUploadStudentList = () => {
+  const uploadButton = document.querySelector('#select-student-list-file') as HTMLInputElement;
   uploadButton.value = '' // 清空
   uploadButton.click() // 点一下
 
@@ -47,7 +55,7 @@ const handleUploadList = () => {
             ElMessage.error('名字不够！（需 ≥2 人）')
           } else {
             // 更新列表
-            useStudentsStore().setStudentList(lines)
+            useStudentListStore().setStudentList(lines)
           }
 
           ElMessage.success('成功导入！回到主界面查看详细信息')
@@ -67,7 +75,9 @@ const handleUploadList = () => {
     }
   })
 }
-const handleUploadBgImg = () => {
+
+// 背景图上传
+const handleUploadBackgroundImage = () => {
   const uploadButton = document.querySelector('#select-bg-file') as HTMLInputElement;
   uploadButton.value = '' // 清空
   uploadButton.click() // 点一下
@@ -76,7 +86,7 @@ const handleUploadBgImg = () => {
   uploadButton?.addEventListener('change', (event) => {
     const target = event.target as HTMLInputElement
     if (target.files && target.files.length > 0) {
-      const bgImgFile = target.files[0] as File
+      const backgroundImageFile = target.files[0] as File
 
       const reader = new FileReader()
 
@@ -96,7 +106,7 @@ const handleUploadBgImg = () => {
         ElMessage.error('出错了，打开控制台查看详细信息')
       })
 
-      reader.readAsDataURL(bgImgFile)
+      reader.readAsDataURL(backgroundImageFile)
     }
   })
 }
@@ -120,7 +130,7 @@ const handleUploadBgImg = () => {
           </el-radio-group>
         </el-form-item>
         <el-form-item label="背景图（可选，是张图都行）">
-          <el-button @click="handleUploadBgImg">点击上传</el-button>
+          <el-button @click="handleUploadBackgroundImage">点击上传</el-button>
           <input type="file" accept="image/*" style="display: none;" id="select-bg-file">
         </el-form-item>
         <el-form-item label="不透明度（%）">
@@ -155,6 +165,9 @@ const handleUploadBgImg = () => {
       <el-button type="danger" @click="dialogs.resetSettings = true">
         重置设置和学生名单
       </el-button>
+      <el-button type="danger" @click="dialogs.resetSettings = true">
+        重置设置和学生名单
+      </el-button>
     </el-card>
   </div>
   <el-dialog title="警告" v-model="dialogs.importStudentList">
@@ -164,17 +177,25 @@ const handleUploadBgImg = () => {
     <input type="file" accept=".txt" style="display: none;" id="select-list-file">
     <template #footer>
       <el-button @click="dialogs.importStudentList = false">点错了点错了</el-button>
-      <el-button type="primary" @click="handleUploadList">选择文件</el-button>
+      <el-button type="primary" @click="handleUploadStudentList">选择文件</el-button>
     </template>
   </el-dialog>
   <el-dialog title="警告" :show-close="false" v-model="dialogs.resetSettings">
     <p>你即将重置所有设置！！</p>
-    <p>包括学生名单在内的所有东西都将被清除！！</p>
     <p><b>（仅推荐在新的班级使用时重置）</b></p>
     <p>这是最后的警告，你确定要清除吗？</p>
     <template #footer>
       <el-button @click="dialogs.resetSettings = false">点错了点错了</el-button>
-      <el-button type="danger" @click="handleReset">重置吧</el-button>
+      <el-button type="danger" @click="handleSettingReset">重置吧</el-button>
+    </template>
+  </el-dialog>
+  <el-dialog title="警告" :show-close="false" v-model="dialogs.resetList">
+    <p>你即将重置学生名单！！</p>
+    <p><b>（仅推荐在新的班级使用时重置）</b></p>
+    <p>这是最后的警告，你确定要清除吗？</p>
+    <template #footer>
+      <el-button @click="dialogs.resetSettings = false">点错了点错了</el-button>
+      <el-button type="danger" @click="handleStudentListReset">重置吧</el-button>
     </template>
   </el-dialog>
 </template>

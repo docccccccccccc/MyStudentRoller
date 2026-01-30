@@ -28,22 +28,22 @@ export const defaultStudentList = [
     '路人 24',
   ]
 
-export const useStudentsStore = defineStore('students', () => {
+export const useStudentListStore = defineStore('students', () => {
   const savedStudentList = localStorage.getItem('students')
   const parsedStudentList = savedStudentList ? JSON.parse(savedStudentList) : defaultStudentList
-  const students = ref<string[]>(parsedStudentList)
+  const studentList = ref<string[]>(parsedStudentList)
   const getStudentList = computed(() => {
-    return students.value
+    return studentList.value
   })
   function setStudentList(list: string[]): void {
-    students.value = [...list]
+    studentList.value = [...list]
     localStorage.setItem('students', JSON.stringify(list))
   }
 
   function resetStudentList() {
-    students.value = defaultStudentList
-    localStorage.setItem('students', JSON.stringify(students.value))
+    studentList.value = defaultStudentList
+    localStorage.setItem('students', JSON.stringify(studentList.value))
   }
 
-  return { students, getStudentList, setStudentList, resetStudentList }
+  return { studentList, getStudentList, setStudentList, resetStudentList }
 })

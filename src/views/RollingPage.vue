@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import { useHistoryStore } from '@/stores/history'
 import { useSettingStore } from '@/stores/settings'
-import { useStudentsStore } from '@/stores/students'
+import { useStudentListStore } from '@/stores/students'
 import { storeToRefs } from 'pinia'
 import { computed, ref } from 'vue'
 
-const studentsStore = useStudentsStore()
+const studentsStore = useStudentListStore()
 const historyStore = useHistoryStore()
 const settingStore = useSettingStore()
 
-const { students } = storeToRefs(studentsStore)
+const { studentList } = storeToRefs(studentsStore)
 const { settings } = storeToRefs(settingStore)
 // const { addRecord } = historyStore
 
@@ -28,20 +28,16 @@ function handleRandom() {
   randomIsDone.value = false // 状态设置为未完成
   resultDialogVisible.value = true // 显示窗口
   // 先确定结果
-  console.log('确认结果')
   for (let i = 0; i < numberOfStudent.value; i++) {
-    chosenStudentIndex = Math.floor(Math.random() * students.value.length) // 从 0 - 长度中选择一个
-    chosenStudentList.value.push(students.value[chosenStudentIndex] || '') // 然后加进列表里面
+    chosenStudentIndex = Math.floor(Math.random() * studentList.value.length) // 从 0 - 长度中选择一个
+    chosenStudentList.value.push(studentList.value[chosenStudentIndex] || '') // 然后加进列表里面
   }
-  console.log('确认结果完毕')
   // 如果不立即显示结果
   if (settings.value.animation.enabled) {
-    console.log('播放动画')
     // 播放动画
     const animation = setInterval(() => {
-      randomAnimationStudent.value = students.value[Math.floor(Math.random() * students.value.length)] || ''
+      randomAnimationStudent.value = studentList.value[Math.floor(Math.random() * studentList.value.length)] || ''
     }, settings.value.animation.interval)
-    console.log('Set Interval')
     setTimeout(() => {
       clearInterval(animation)
       randomIsDone.value = true // 状态设置为完成
@@ -66,7 +62,7 @@ const isVerticalLayout = computed(() => {
 const resultDialogVisible = ref(false)
 const randomIsDone = ref(false)
 const chosenStudentList = ref<string[]>([])
-const randomAnimationStudent = ref(students.value[0]) // 播放动画时显示的名字
+const randomAnimationStudent = ref(studentList.value[0]) // 播放动画时显示的名字
 </script>
 
 <template>
@@ -76,9 +72,9 @@ const randomAnimationStudent = ref(students.value[0]) // 播放动画时显示�
       <el-col :span="isVerticalLayout ? 24 : 18">
         <el-card>
           <template #header> 学生名单 </template>
-          <el-empty v-if="students.length === 0" description="空空如也" />
-          <el-space wrap v-if="students.length !== 0">
-            <div v-for="student in students" :key="student">
+          <el-empty v-if="studentList.length === 0" description="空空如也" />
+          <el-space wrap v-if="studentList.length !== 0">
+            <div v-for="student in studentList" :key="student">
               <el-text size="large" class="student-name"> {{ student }} </el-text>
             </div>
           </el-space>
@@ -92,7 +88,7 @@ const randomAnimationStudent = ref(students.value[0]) // 播放动画时显示�
             <el-form-item label="人数">
               <el-slider
                 :min="1"
-                :max="students.length - 1"
+                :max="studentList.length - 1"
                 v-model="numberOfStudent"
                 :show-tooltip="false"
                 show-input

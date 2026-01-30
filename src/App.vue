@@ -16,10 +16,12 @@ const { history } = storeToRefs(historyStore)
 
 // 然后从本地读取数据
 onMounted(() => {
+  // 历史记录
   if(!localStorage.getItem("history")) {
     localStorage.setItem("history", JSON.stringify([]))
   }
   history.value = JSON.parse(localStorage.getItem('history') as string)
+  // 背景图
   document.body.style.backgroundImage = `url("${useSettingStore().settings.backgroundImage}")`
 })
 // 然后是我自己瞎写的组件，放这里
