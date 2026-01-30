@@ -23,6 +23,8 @@ onMounted(() => {
   history.value = JSON.parse(localStorage.getItem('history') as string)
   // 背景图
   document.body.style.backgroundImage = `url("${useSettingStore().settings.backgroundImage}")`
+  // 透明度
+  document.querySelector(".el-card")
 })
 // 然后是我自己瞎写的组件，放这里
 // 以及一些杂七杂八的数据
@@ -90,4 +92,8 @@ body {
   height: 100vh;
   z-index: 999;
 }
+
+// .el-card {
+//   backdrop-filter: opacity(var(--opacity, 0.8));
+// }
 </style>
