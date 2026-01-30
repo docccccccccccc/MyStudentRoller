@@ -28,9 +28,11 @@ function handleRandom() {
   randomIsDone.value = false // 状态设置为未完成
   resultDialogVisible.value = true // 显示窗口
   // 先确定结果
-  for (let i = 0; i < numberOfStudent.value; i++) {
+  while (chosenStudentList.value.length < numberOfStudent.value) {
     chosenStudentIndex = Math.floor(Math.random() * studentList.value.length) // 从 0 - 长度中选择一个
-    chosenStudentList.value.push(studentList.value[chosenStudentIndex] || '') // 然后加进列表里面
+    if (!chosenStudentList.value.includes(studentList.value[chosenStudentIndex] || '')){ // 如果还没有被选到
+      chosenStudentList.value.push(studentList.value[chosenStudentIndex] || '') // 那么加进列表里面
+    }
   }
   // 如果不立即显示结果
   if (settings.value.animation.enabled) {
