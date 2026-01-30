@@ -174,7 +174,7 @@ const handleUploadBackgroundImage = () => {
     <p>导入新的名单文件将会覆盖原先的名单且不可恢复！</p>
     <p>你确定要导入吗？</p>
     <p>（导入失败不会影响当前名单）</p>
-    <input type="file" accept=".txt" style="display: none;" id="select-list-file">
+    <input type="file" accept=".txt" style="display: none;" id="select-student-list-file">
     <template #footer>
       <el-button @click="dialogs.importStudentList = false">点错了点错了</el-button>
       <el-button type="primary" @click="handleUploadStudentList">选择文件</el-button>
