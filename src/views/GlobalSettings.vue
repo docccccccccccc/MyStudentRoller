@@ -164,12 +164,6 @@ const handleUploadBackgroundImage = () => {
       <template #header>危险操作</template>
       <el-button type="danger" @click="dialogs.resetSettings = true">
         重置设置
-<<<<<<< HEAD
-      </el-button>
-      <el-button type="danger" @click="dialogs.resetStudentList = true">
-        重置学生名单
-=======
->>>>>>> 7a8a987 (feat: 新增调节不透明度的功能)
       </el-button>
       <el-button type="danger" @click="dialogs.resetStudentList = true">
         重置学生名单
