@@ -5,13 +5,6 @@
     <h1>帮助</h1>
     <p>（这份帮助是考虑到不懂电脑的人的，如果你觉得太啰嗦，并且知道具体操作的话，可以不看）</p>
     <el-card>
-    <h2>目录</h2>
-    <el-anchor :offset="72">
-      <el-anchor-link href="#roll">抽选操作</el-anchor-link>
-      <el-anchor-link href="#import">导入名单</el-anchor-link>
-      <el-anchor-link href="#settings">设置</el-anchor-link>
-      <el-anchor-link href="#history">查看历史记录</el-anchor-link>
-    </el-anchor>
     <h2 id="roll">抽选操作</h2>
     <p>首先点击最左侧的 <font-awesome-icon icon="fas fa-dice" /> 图标。</p>
     <p>在“操作”面板上会有一个滑动条和一个输入框，滑动条的值和输入框是一样的。</p>
