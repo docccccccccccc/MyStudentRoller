@@ -6,4 +6,6 @@
 
 如果你发现我写的代码有什么问题，欢迎开 Issue！
 
+也欢迎 Pull Request 喵~
+
 体验链接：[这里](https://student-roller.netlify.app/#/)
